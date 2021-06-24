@@ -2,20 +2,28 @@ package Model;
 
 import org.bson.Document;
 
-public class Empleado extends Persona{
-
+public class Empleado{
+	private Persona persona;
 	private String cuil;
 	private Sucursal sucursal;
 	private boolean esEncargado;
 	
 	public Empleado() {}
 
-	public Empleado(String nombre, String apellido, int dni, String nroAfiliado, Domicilio domicilio,
-			String obraSocial,String cuil, Sucursal sucursal, boolean esEncargado) {
-		super(nombre, apellido, dni, nroAfiliado, domicilio, obraSocial);
+	public Empleado(Persona persona,String cuil, Sucursal sucursal, boolean esEncargado) {
+		this.persona = persona;
 		this.cuil = cuil;
 		this.sucursal = sucursal;
 		this.esEncargado = esEncargado;
+	}
+
+	
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
 	public String getCuil() {
@@ -43,9 +51,9 @@ public class Empleado extends Persona{
 	}
 	
 	public Document toDocument() {
-		return new Document(super.toDocument())
+		return new Document("persona", this.persona.toDocument())
 				.append("cuil", this.cuil)
-				.append("sucursal", sucursal.toDocument())
+				.append("sucursal", this.sucursal.toDocument())
 				.append("esEncargado", this.esEncargado);
 	}
 }

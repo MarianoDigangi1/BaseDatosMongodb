@@ -1,6 +1,8 @@
 package Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bson.Document;
 
@@ -13,6 +15,7 @@ public class Venta{
 	private Persona cliente;
 	private Empleado empleadoAtencion;
 	private Empleado empleadoCobro;
+	private List<DetalleVenta> detalleVenta;
 	
 	public Venta() {}
 
@@ -69,7 +72,20 @@ public class Venta{
 	public void setEmpleadoCobro(Empleado empleadoCobro) {
 		this.empleadoCobro = empleadoCobro;
 	}
+	
+	public List<DetalleVenta> getDetalleVenta() {
+		return detalleVenta;
+	}
+
+	public void setDetalleVenta(List<DetalleVenta> detalleVenta) {
+		this.detalleVenta = detalleVenta;
+	}
+
 	public Document toDocument() {
+		/*List<Document> ds = new ArrayList<Document>();
+		for(DetalleVenta d : this.detalleVenta) {
+			ds.add(d.toDocument());
+		}	*/
 		return new Document("fecha", this.fecha)
 				  .append("numeroTicket", this.numeroTicket)
 				  .append("totalVenta", this.totalVenta)
